@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Student Website</title>
+
+	<meta charset="utf-8">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<style>
+		footer {
+			height: 100px;
+			bottom: 0;
+			width: 100%;
+		}
+
+		footer p {
+			font-weight: bold;
+			text-align: center;
+			color: black;
+			margin-top: 41px;
+			margin-bottom: 0px;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Student Website</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/studentlist">Student List</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/contact">Contact Us</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h1>Contact Details</h1>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
+					<div class="card-header">
+						Professor Thomas William
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Phone: +1 (437) 234-4567</li>
+						<li class="list-group-item">Department: Computer Science</li>
+					</ul>
+					<div class="card-body">
+						<a href="mailto:thomas.william@college.ca" class="card-link">thomas.william@college.ca</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="card" style="width: 18rem;">
+					<div class="card-header">
+						Professor Lily Jones
+					</div>
+					<ul class="list-group list-group-flush">
+						<li class="list-group-item">Phone: +1 (647) 937-2345</li>
+						<li class="list-group-item">Department: Computer Science</li>
+					</ul>
+					<div class="card-body">
+						<a href="mailto:lily.jones@college.ca" class="card-link">lily.jones@college.ca</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p>Number of visitors: <span id="visitorCount"></span></p>
+
+			<script>
+				window.setInterval(function () {
+					$.get("/currentCount", function (results) {
+						$("#visitorCount").html(results);
+					})
+				}, 3000);
+			</script>
+
+			<span class="text-muted">&copy; Copyright 2099. All Rights Reserved.<br>
+				Vidhu Sharma &nbsp; &nbsp; c0772709</span>
+		</div>
+	</footer>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>	
+	<meta charset="ISO-8859-1">
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		
+	<title>Student Website</title>
+	
+	<style>
+		footer {
+			height: 100px;
+			bottom: 0;
+			width: 100%;
+		}
+
+		footer p {
+			font-weight: bold;
+			text-align: center;
+			color: black;
+			margin-top: 41px;
+			margin-bottom: 0px;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Student Website</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/studentlist">Student List</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/contact">Contact Us</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h3>List of Students</h3>
+		<a th:href="@{/addStudent}" class="btn btn-primary">Add Student</a></br></br>
+
+		<form action="#" th:action="@{/studentlist}" method="get">
+			<div class="form-group" style="display: flex;">
+				<label for="searchFilter" style="margin-right: 5px;">Enter to Filter</label>
+				<input type="text" name="searchFilter" id="searchFilter" th:value="*{filterValue}"
+					class="form-control col-md-4" style="margin-right: 5px;">
+				<button type="submit" class="btn btn-primary">Filter</button>
+			</div>
+		</form>
+
+		<table class="table" id="studentTable">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">Student No.</th>
+					<th scope="col">First Name</th>
+					<th scope="col">Last Name</th>
+					<th scope="col">Semester</th>
+					<th scope="col">Year</th>
+					<th scope="col">Score</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student : ${studentList}">
+					<td th:text="${student.studentNo}"></td>
+					<td th:text="${student.firstName}"></td>
+					<td th:text="${student.lastName}"></td>
+					<td th:text="${student.semester}"></td>
+					<td th:text="${student.year}"></td>
+					<td th:text="${student.score}"></td>
+					<td>
+						<a th:href="@{/updateStudent/{id}(id=${student.id})}" class="btn btn-primary">Update</a>
+						<a th:href="@{/deleteStudentConfirm/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p>Number of visitors: <span id="visitorCount"></span></p>
+			
+			<script>
+				window.setInterval(function () {
+					$.get("/currentCount", function (results) {
+						$("#visitorCount").html(results);
+					})
+				}, 3000);
+			</script>
+			
+			<span class="text-muted">&copy; Copyright 2099. All Rights Reserved.<br>
+				Vidhu Sharma &nbsp; &nbsp; c0772709</span>
+		</div>
+	</footer>
+</body>
+
+</html>

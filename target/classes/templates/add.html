@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Student Website</title>
+
+	<meta charset="ISO-8859-1">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<title>Student Website</title>
+
+	<style>
+		footer {
+			height: 100px;
+			bottom: 0;
+			width: 100%;
+		}
+
+		span {
+			color: red;
+		}
+
+		footer p {
+			font-weight: bold;
+			text-align: center;
+			color: black;
+			margin-top: 41px;
+			margin-bottom: 0px;
+		}
+
+		footer span {
+			color: black;
+		}
+	</style>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Student Website</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="/">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/studentlist">Student List</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="/contact">Contact Us</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h3 th:text="${viewText}"></h3></br>
+
+		<form action="#" th:action="@{/saveStudent}" th:object="${student}" method="post">
+			<input type="hidden" th:field="*{id}">
+
+			<div class="form-group">
+				<label th:for="${#ids.next('studentNo')}">Enter Student No.</label>
+				<input type="text" th:field="*{studentNo}" class="form-control">
+				<span th:if="${#fields.hasErrors('studentNo')}" th:errors="*{studentNo}"></span>
+			</div>
+
+			<div class="form-group">
+				<label th:for="${#ids.next('firstName')}">Enter First Name</label>
+				<input type="text" th:field="*{firstName}" class="form-control">
+				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+			</div>
+
+			<div class="form-group">
+				<label th:for="${#ids.next('lastName')}">Enter Last Name</label>
+				<input type="text" th:field="*{lastName}" class="form-control">
+				<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+			</div>
+
+			<div class="form-group">
+				<label th:for="${#ids.next('semester')}">Enter Semester</label>
+				<input type="text" th:field="*{semester}" class="form-control">
+				<span th:if="${#fields.hasErrors('semester')}" th:errors="*{semester}"></span>
+			</div>
+
+			<div class="form-group">
+				<label th:for="${#ids.next('year')}">Enter Year</label>
+				<input type="text" th:field="*{year}" class="form-control">
+				<span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span>
+			</div>
+
+			<div class="form-group">
+				<label th:for="${#ids.next('score')}">Enter Score</label>
+				<input type="text" th:field="*{score}" class="form-control">
+				<span th:if="${#fields.hasErrors('score')}" th:errors="*{score}"></span>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Save</button>
+			<a th:href="@{/studentlist}" class="btn btn-secondary">Cancel</a>
+		</form>
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<p>Number of visitors: <span id="visitorCount"></span></p>
+
+			<script>
+				window.setInterval(function () {
+					$.get("/currentCount", function (results) {
+						$("#visitorCount").html(results);
+					})
+				}, 3000);
+			</script>
+
+			<span class="text-muted">&copy; Copyright 2099. All Rights Reserved.<br>
+				Vidhu Sharma &nbsp; &nbsp; c0772709</span>
+		</div>
+	</footer>
+</body>
+
+</html>
